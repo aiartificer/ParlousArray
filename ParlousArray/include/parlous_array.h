@@ -17,10 +17,10 @@ extern "C"{
 #endif // IN_DEFOLD
 
 
-int get_int(lua_State* L);
-int put_int(lua_State* L);
-void defineMetatable(lua_State* L);
-int newIntArray(lua_State* L);
+// int get_int(lua_State* L);
+// int put_int(lua_State* L);
+// void defineMetatable(lua_State* L);
+// int newIntArray(lua_State* L);
 
 void LuaInit(lua_State* L);
 
