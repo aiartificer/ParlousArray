@@ -12,12 +12,24 @@ end
 function Test_Parlous_Array_Meta()
   print("\n\nTest_Parlous_Array")
   local arr = Setup_PArray(10, 8)
+
+  -- Test length and index
   print("length of arr: "..#arr)
   assert(#arr == 10, "Expected length of arr to be 10, actually "..#arr)
   arr[0] = 1
   assert(arr[0] == 1, "Expected arr[0]=1, actually arr[0]="..arr[0])
   print("arr[0] = "..arr[0])
   assert(arr[0] == 1, "Expected arr[0]=1, actually arr[0]="..arr[0])
+
+  -- Test add
+  local arrB = Setup_PArray(10, 8)
+  arr[1] = 1; arr[2] = 2; arr[3] = 3; arr[4] = 4; arr[5] = 5;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr + arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 6, "Expected arr[3]=6, actually arr[3]="..arr[3])
 
   -- Test error condition
   if pcall(function () print(arr[11]) end) then
@@ -67,7 +79,20 @@ function Speed_Test_PArray_Map()
   -- Run map on ParlousArray
   start_time = os.time()
   parray:map(function (x) return x/(x+1)*(x+2)/(x+3)*(x*4)/(x+5) end)
-  print("Time tanspired running code on table: "..os.time()-start_time)
+  print("Time tanspired running code on PArray table: "..os.time()-start_time)
+
+  -- Run code on Lua table
+  start_time = os.time()
+  for i=1, ARR_SIZE do
+    lua_table[i] = lua_table[i] + lua_table[i]
+  end
+  print("Time tanspired running addition code on Lua table: "..os.time()-start_time)
+
+  -- Run map on ParlousArray
+  parray = parlous_array.new_int_array(ARR_SIZE*15, 8)
+  start_time = os.time()
+  parray = parray + parray
+  print("Time tanspired running addition code on 15xPArray table: "..os.time()-start_time)
 end
 
 

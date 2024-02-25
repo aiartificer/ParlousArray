@@ -57,6 +57,25 @@ static int len(lua_State* L)                      //// [-0, +1, m]
     return 1;
 }
 
+static int add_int(lua_State* L)                  //// [-0, +1, m]
+{
+    printf("### Called add_int...\n");  // ### DEBUG
+    // Check and collect parameters from stack
+    lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
+    lua_Integer *arrA = (lua_Integer *)lua_touserdata(L, -2);
+    lua_Integer *arrB = (lua_Integer *)lua_touserdata(L, -1);
+
+    // Add value to all elements
+    for (lua_Integer i = 0; i < length; i++)
+        arrA[i] += arrB[i];
+    
+    // Return arrA
+    lua_pushvalue(L, -2);
+
+    // Return 0 items
+    return 1;
+}
+
 static int map(lua_State* L)
 {
     // Check and collect parameters from stack
@@ -136,6 +155,11 @@ static void defineMetatable(lua_State* L,         //// [-0, +0, m]
     // Define the __index method
     lua_pushstring(L, "__newindex");                // [-0, +1, m]
     len_factory(L, length, put_int);                // [-0, +1, m]
+    lua_settable(L, -3);                            // [-2, +0, -]
+
+    // Define the __index method
+    lua_pushstring(L, "__add");                     // [-0, +1, m]
+    len_factory(L, length, add_int);                // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Set the metatable
