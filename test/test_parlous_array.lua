@@ -11,13 +11,11 @@ end
 
 function Test_Parlous_Array_Meta()
   print("\n\nTest_Parlous_Array")
-  --local arr = parray.new_int_array(10, 8)
-  local arr = parlous_array.new_int_array(10, 8)
-  print("-- parlous_array -----------------------")
-  for k,v in pairs(getmetatable(arr)) do print(k,v) end
-  print("----------------------------------------")
+  local arr = Setup_PArray()
   print("length of arr: "..#arr)
+  assert(#arr == 10, "Expected length of arr to be 10, actually "..#arr)
   arr[0] = 1
+  assert(arr[0] == 1, "Expected arr[0]=1, actually arr[0]="..arr[0])
   print("arr[0] = "..arr[0])
   assert(arr[0] == 1, "Expected arr[0]=1, actually arr[0]="..arr[0])
 
@@ -35,12 +33,10 @@ function Test_Parlous_Array_Map()
   arr[1] = 1; arr[2] = 2; arr[3] = 3; arr[4] = 4; arr[5] = 5;
   arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
   assert(arr[0] == 10, "Expected arr[0]=10, actually arr[0]="..arr[0])
-  print("vvvvvvvvvvvvvvvvvvvv")
   print("arr[0] = "..arr[0])
+  assert(arr[0] == 10, "Expected arr[0]=10, actually arr[0]="..arr[0])
   arr:map(function (x) return x+1 end)
-  print("xxxxxxxxxxxxxxxxxxxx")
   print("arr[0] = "..arr[0])
-  print("^^^^^^^^^^^^^^^^^^^^")
   assert(arr[0] == 11, "Expected arr[0]=11, actually arr[0]="..arr[0])
 end
 
