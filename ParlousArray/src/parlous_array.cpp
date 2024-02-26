@@ -7,6 +7,8 @@
 #include "parlous_array.h"
 
 
+static int newIntArray(lua_State* L);
+
 static int get_int(lua_State* L)                  //// [-0, +1, m]
 {
     // Check and collect parameters from stack
@@ -59,18 +61,23 @@ static int len(lua_State* L)                      //// [-0, +1, m]
 
 static int add_int(lua_State* L)                  //// [-0, +1, m]
 {
-    printf("### Called add_int...\n");  // ### DEBUG
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
+    lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
     lua_Integer *arrA = (lua_Integer *)lua_touserdata(L, -2);
     lua_Integer *arrB = (lua_Integer *)lua_touserdata(L, -1);
 
+    // Allocate array to hold results
+    lua_pushinteger(L, length);                     // [-0, +1, -]
+    lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    newIntArray(L);                                 // [-0, +1, m]
+    lua_Integer *arrC = (lua_Integer *)lua_touserdata(L, -1);
+    lua_insert(L, lua_gettop(L) - 2);
+    lua_pop(L, 2);                                  // [-2, +0, -]
+
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
-        arrA[i] += arrB[i];
-    
-    // Return arrA
-    lua_pushvalue(L, -2);
+        arrC[i] = arrA[i] + arrB[i];
 
     // Return 0 items
     return 1;
@@ -101,12 +108,14 @@ static int map(lua_State* L)
 
 static int len_factory(lua_State* L,              //// [-0, +1, m]
                        lua_Integer length,
+                       lua_Integer type_size,
                        lua_CFunction fn)
 {
 
     // Collect len and put on stack
     lua_pushinteger(L, length);                     // [-0, +1, -]
-    lua_pushcclosure(L, fn, 1);                     // [-1, +1, -]
+    lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushcclosure(L, fn, 2);                     // [-2, +1, -]
     
     // Return 1 item
     return 1;
@@ -137,36 +146,37 @@ static int index_call(lua_State* L)               //// [-0, +1, m]
 }
 
 static void defineMetatable(lua_State* L,         //// [-0, +0, m]
-                            lua_Integer length)
+                            lua_Integer length,
+                            lua_Integer type_size)
 {
     // Create a metatable for the user data
     lua_createtable(L, 0, 1);                       // [-0, +1, m]
 
     // Define __len
     lua_pushstring(L, "__len");                     // [-0, +1, m]
-    len_factory(L, length, len);                    // [-0, +1, m]
+    len_factory(L, length, type_size, len);         // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__index");                   // [-0, +1, m]
-    len_factory(L, length, index_call);             // [-0, +1, m]
+    len_factory(L, length, type_size, index_call);  // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__newindex");                // [-0, +1, m]
-    len_factory(L, length, put_int);                // [-0, +1, m]
+    len_factory(L, length, type_size, put_int);    // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__add");                     // [-0, +1, m]
-    len_factory(L, length, add_int);                // [-0, +1, m]
+    len_factory(L, length, type_size, add_int);     // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Set the metatable
     lua_setmetatable(L, -2);                        // [-1, +0, -]
 }
 
-static int newIntArray(lua_State* L)              //// [-0, +1, m]
+int newIntArray(lua_State* L)                     //// [-0, +1, m]
 {
     // Check and get parameter string from stack
     lua_Integer length = luaL_checkinteger(L, -2);
@@ -176,7 +186,7 @@ static int newIntArray(lua_State* L)              //// [-0, +1, m]
     lua_newuserdata(L, length*type_size);           // [-0, +1, m]
 
     // Define metatable
-    defineMetatable(L, length);                     // [-0, +0, m]
+    defineMetatable(L, length, type_size);          // [-0, +0, m]
     
     // Return 1 item
     return 1;
