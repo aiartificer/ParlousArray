@@ -30,16 +30,6 @@ function Test_Parlous_Int_Array_Meta()
   print("arr[0] = "..arr[0])
   assert(arr[0] == 1, "Expected arr[0]=1, actually arr[0]="..arr[0])
 
-  -- Test add
-  local arrB = Setup_Int_PArray(10, 8)
-  arr[1] = 1; arr[2] = 2; arr[3] = 3; arr[4] = 4; arr[5] = 5;
-  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
-  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
-  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
-  arr = arr + arrB;
-  print("arr[3] = "..arr[3])
-  assert(arr[3] == 6, "Expected arr[3]=6, actually arr[3]="..arr[3])
-
   -- Test error condition
   if pcall(function () print(arr[11]) end) then
     print("Expected index out of bounds error and didn't get one")
@@ -143,9 +133,170 @@ function Test_Parlous_Num_Array_Meta()
   end
 end
 
+function Test_Parlous_Array_Add()
+  print("\n\nTest_Parlous_Array_Add")
+
+  -- Test add integers
+  local arr = Setup_Int_PArray(10, 8)
+  local arrB = Setup_Int_PArray(10, 8)
+  arr[1] = 1; arr[2] = 2; arr[3] = 3; arr[4] = 4; arr[5] = 5;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr + arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 6, "Expected arr[3]=6, actually arr[3]="..arr[3])
+
+  -- Test add numbers
+  local arr = Setup_Num_PArray(10, 8)
+  local arrB = Setup_Num_PArray(10, 8)
+  arr[1] = 1.1; arr[2] = 2.2; arr[3] = 3.3; arr[4] = 4.4; arr[5] = 5.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arrB[1] = 1.1; arrB[2] = 2.2; arrB[3] = 3.3; arrB[4] = 4.4; arrB[5] = 5.5;
+  arrB[6] = 6.6; arrB[7] = 7.7; arrB[8] = 8.8; arrB[9] = 9.9; arrB[0] = 10.0;
+  arr = arr + arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 6.6, "Expected arr[3]=6.6, actually arr[3]="..arr[3])
+end
+
+function Test_Parlous_Array_Sub()
+  print("\n\nTest_Parlous_Array_Sub")
+
+  -- Test subtract integers
+  local arr = Setup_Int_PArray(10, 8)
+  local arrB = Setup_Int_PArray(10, 8)
+  arr[1] = 2; arr[2] = 3; arr[3] = 4; arr[4] = 5; arr[5] = 6;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr - arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 1, "Expected arr[3]=1, actually arr[3]="..arr[3])
+
+  -- Test subtract numbers
+  local arr = Setup_Num_PArray(10, 8)
+  local arrB = Setup_Num_PArray(10, 8)
+  arr[1] = 2.1; arr[2] = 3.2; arr[3] = 4.3; arr[4] = 5.4; arr[5] = 6.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arrB[1] = 1.1; arrB[2] = 2.2; arrB[3] = 3.3; arrB[4] = 4.4; arrB[5] = 5.5;
+  arrB[6] = 6.6; arrB[7] = 7.7; arrB[8] = 8.8; arrB[9] = 9.9; arrB[0] = 10.0;
+  arr = arr - arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 1.0, "Expected arr[3]=1.0, actually arr[3]="..arr[3])
+end
+
+function Test_Parlous_Array_Mult()
+  print("\n\nTest_Parlous_Array_Mult")
+
+  -- Test multiply integers
+  local arr = Setup_Int_PArray(10, 8)
+  local arrB = Setup_Int_PArray(10, 8)
+  arr[1] = 1; arr[2] = 2; arr[3] = 3; arr[4] = 4; arr[5] = 5;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr*arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 9, "Expected arr[3]=9, actually arr[3]="..arr[3])
+
+  -- Test multiply numbers
+  local arr = Setup_Num_PArray(10, 8)
+  local arrB = Setup_Num_PArray(10, 8)
+  arr[1] = 1.1; arr[2] = 2.2; arr[3] = 3.3; arr[4] = 4.4; arr[5] = 5.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arrB[1] = 1.1; arrB[2] = 2.2; arrB[3] = 3.3; arrB[4] = 4.4; arrB[5] = 5.5;
+  arrB[6] = 6.6; arrB[7] = 7.7; arrB[8] = 8.8; arrB[9] = 9.9; arrB[0] = 10.0;
+  arr = arr*arrB;
+  print("arr[3] = "..arr[3])
+  assert(0.1 > arr[3] - 10.89, "Expected arr[3]=10.89, actually arr[3]="..arr[3])
+end
+
+function Test_Parlous_Array_Div()
+  print("\n\nTest_Parlous_Array_Div")
+
+  -- Test divide integers
+  local arr = Setup_Int_PArray(10, 8)
+  local arrB = Setup_Int_PArray(10, 8)
+  arr[1] = 2; arr[2] = 3; arr[3] = 4; arr[4] = 5; arr[5] = 6;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr/arrB;
+  print("arr[3] = "..arr[3])
+  assert(0.1 > arr[3] - 1.33, "Expected arr[3]=1.33, actually arr[3]="..arr[3])
+
+  -- Test divide numbers
+  local arr = Setup_Num_PArray(10, 8)
+  local arrB = Setup_Num_PArray(10, 8)
+  arr[1] = 2.1; arr[2] = 3.2; arr[3] = 4.3; arr[4] = 5.4; arr[5] = 6.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arrB[1] = 1.1; arrB[2] = 2.2; arrB[3] = 3.3; arrB[4] = 4.4; arrB[5] = 5.5;
+  arrB[6] = 6.6; arrB[7] = 7.7; arrB[8] = 8.8; arrB[9] = 9.9; arrB[0] = 10.0;
+  arr = arr/arrB;
+  print("arr[3] = "..arr[3])
+  assert(0.1 > arr[3] - 1.30, "Expected arr[3]=1.30, actually arr[3]="..arr[3])
+end
+
+function Test_Parlous_Array_Mod()
+  print("\n\nTest_Parlous_Array_Mod")
+
+  -- Test modulo integers
+  local arr = Setup_Int_PArray(10, 8)
+  local arrB = Setup_Int_PArray(10, 8)
+  arr[1] = 2; arr[2] = 3; arr[3] = 4; arr[4] = 5; arr[5] = 6;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr%arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 1, "Expected arr[3]=1.33, actually arr[3]="..arr[3])
+
+  -- Test modulo numbers
+  local arr = Setup_Num_PArray(10, 8)
+  local arrB = Setup_Num_PArray(10, 8)
+  arr[1] = 2.1; arr[2] = 3.2; arr[3] = 4.3; arr[4] = 5.4; arr[5] = 6.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arrB[1] = 1.1; arrB[2] = 2.2; arrB[3] = 3.3; arrB[4] = 4.4; arrB[5] = 5.5;
+  arrB[6] = 6.6; arrB[7] = 7.7; arrB[8] = 8.8; arrB[9] = 9.9; arrB[0] = 10.0;
+  arr = arr%arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 1, "Expected arr[3]=1.30, actually arr[3]="..arr[3])
+end
+
+function Test_Parlous_Array_Pow()
+  print("\n\nTest_Parlous_Array_Pow")
+
+  -- Test power integers
+  local arr = Setup_Int_PArray(10, 8)
+  local arrB = Setup_Int_PArray(10, 8)
+  arr[1] = 2; arr[2] = 3; arr[3] = 4; arr[4] = 5; arr[5] = 6;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  arrB[1] = 1; arrB[2] = 2; arrB[3] = 3; arrB[4] = 4; arrB[5] = 5;
+  arrB[6] = 6; arrB[7] = 7; arrB[8] = 8; arrB[9] = 9; arrB[0] = 10;
+  arr = arr^arrB;
+  print("arr[3] = "..arr[3])
+  assert(arr[3] == 64, "Expected arr[3]=1.33, actually arr[3]="..arr[3])
+
+  -- Test power numbers
+  local arr = Setup_Num_PArray(10, 8)
+  local arrB = Setup_Num_PArray(10, 8)
+  arr[1] = 2.1; arr[2] = 3.2; arr[3] = 4.3; arr[4] = 5.4; arr[5] = 6.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arrB[1] = 1.1; arrB[2] = 2.2; arrB[3] = 3.3; arrB[4] = 4.4; arrB[5] = 5.5;
+  arrB[6] = 6.6; arrB[7] = 7.7; arrB[8] = 8.8; arrB[9] = 9.9; arrB[0] = 10.0;
+  arr = arr^arrB;
+  print("arr[3] = "..arr[3])
+  assert(0.1 > arr[3] - 123.15, "Expected arr[3]=1.30, actually arr[3]="..arr[3])
+end
 
 print("> Test_Parlous_Array <")
 Test_Parlous_Int_Array_Meta()
 Test_Parlous_Array_Map()
 Test_Parlous_Num_Array_Meta()
+Test_Parlous_Array_Add()
+Test_Parlous_Array_Sub()
+Test_Parlous_Array_Mult()
+Test_Parlous_Array_Div()
+Test_Parlous_Array_Mod()
+Test_Parlous_Array_Pow()
 Speed_Test_PArray_Map()
