@@ -12,5 +12,5 @@ height = 640
 title = ParlousArray
 
 [library]
-include_dirs = myextension
+include_dirs = ParlousArray
 
