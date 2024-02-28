@@ -5,6 +5,7 @@
 
 #include <cassert>
 #include <math.h>
+#include <string.h>
 #include "parlous_array.h"
 using namespace std;
 
@@ -238,6 +239,27 @@ static int map(lua_State* L)                      //// [-0, +0, m]
     return 0;
 }
 
+template <typename T>
+static int foreach(lua_State* L)                  //// [-0, +0, m]
+{
+    // Check and collect parameters from stack
+    lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
+    T *arr = (T *)lua_touserdata(L, -2);
+    luaL_checktype(L, -1, LUA_TFUNCTION);
+    lua_pushvalue(L, -1);                           // [-0, +1, -]
+
+    // Setup loop
+    for (lua_Integer i = 0; i < length; i++)
+    {
+        lua_pushnumber(L, (T)arr[i]);               // [-0, +1, -]
+        lua_call(L, 1, 0);                          // [-2, +0, e]
+        lua_pushvalue(L, -1);                       // [-0, +1, -]
+    }
+
+    // Return 0 items
+    return 0;
+}
+
 static int len_factory(lua_State* L,              //// [-0, +1, m]
                        lua_Integer length,
                        lua_Integer type_size,
@@ -262,10 +284,16 @@ static int index_call(lua_State* L)               //// [-0, +1, m]
     if(LUA_TSTRING == lua_type(L, -1))
     {
         const char *f = luaL_checkstring(L, -1);
-        if(f[0] == 'm' && f[1] == 'a' && f[2] == 'p')
+        if(strcmp("map", f) == 0)
         {
             lua_pushinteger(L, length);             // [-0, +1, -]
             lua_pushcclosure(L, map<T>, 1);         // [-1, +1, -]
+            return 1;
+        }
+        else if(strcmp("foreach", f) == 0)
+        {
+            lua_pushinteger(L, length);             // [-0, +1, -]
+            lua_pushcclosure(L, foreach<T>, 1);     // [-1, +1, -]
             return 1;
         }
         else

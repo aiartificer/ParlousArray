@@ -1,4 +1,4 @@
-#ifndef IN_DEFOLD
-#define IN_DEFOLD
+#ifndef NOT_IN_DEFOLD
+#define NOT_IN_DEFOLD
 
 #endif // NOT_IN_DEFOLD

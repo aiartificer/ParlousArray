@@ -51,6 +51,20 @@ function Test_Parlous_Array_Map()
   assert(arr[0] == 11, "Expected arr[0]=11, actually arr[0]="..arr[0])
 end
 
+function Test_Parlous_Array_Foreach()
+  print("\n\nTest_Parlous_Array_Foreach")
+  local arr = Setup_Int_PArray(10, 8)
+  arr[1] = 1; arr[2] = 2; arr[3] = 3; arr[4] = 4; arr[5] = 5;
+  arr[6] = 6; arr[7] = 7; arr[8] = 8; arr[9] = 9; arr[0] = 10;
+  assert(arr[0] == 10, "Expected arr[0]=10, actually arr[0]="..arr[0])
+  print("arr[0] = "..arr[0])
+  assert(arr[0] == 10, "Expected arr[0]=10, actually arr[0]="..arr[0])
+  local sum = 0
+  arr:foreach(function (x) sum = sum + x end)
+  print("sum = "..sum)
+  assert(sum == 55, "Expected sum=55, actually sum="..sum)
+end
+
 function Speed_Test_PArray_Map()
   print("\n\nSpeed_Test_PArray_Map")
   local ARR_SIZE = 100000000
@@ -292,6 +306,7 @@ end
 print("> Test_Parlous_Array <")
 Test_Parlous_Int_Array_Meta()
 Test_Parlous_Array_Map()
+Test_Parlous_Array_Foreach()
 Test_Parlous_Num_Array_Meta()
 Test_Parlous_Array_Add()
 Test_Parlous_Array_Sub()
