@@ -10,23 +10,23 @@
 // ========================
 // = Defold Wrapper Calls =
 // ========================
-static int __get_int(lua_State* L)
-{
-    DM_LUA_STACK_CHECK(L, 1);
-    return get_int(L);
-}
+// static int __get_int(lua_State* L)
+// {
+//     DM_LUA_STACK_CHECK(L, 1);
+//     return get_int(L);
+// }
 
-static int __put_int(lua_State* L)
-{
-    DM_LUA_STACK_CHECK(L, 1);
-    return put_int(L);
-}
+// static int __put_int(lua_State* L)
+// {
+//     DM_LUA_STACK_CHECK(L, 1);
+//     return put_int(L);
+// }
 
-static int __newIntArray(lua_State* L)
-{
-    DM_LUA_STACK_CHECK(L, 1);
-    return newIntArray(L);
-}
+// static int __newIntArray(lua_State* L)
+// {
+//     DM_LUA_STACK_CHECK(L, 1);
+//     return newIntArray(L);
+// }
 
 
 // ========================
