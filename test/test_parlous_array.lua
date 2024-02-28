@@ -1,7 +1,7 @@
 --local parray = require("ParlousArray/ParlousArray")
 
 function Setup_Int_PArray(length, type_size)
-  local arr = parlous_array.new_int_array(length, type_size)
+  local arr = parlous_array.new_int_array(length, type_size, 5)
   print("-- parlous_array -----------------------")
   for k,v in pairs(getmetatable(arr)) do print(k,v) end
   print("----------------------------------------")
@@ -10,7 +10,7 @@ function Setup_Int_PArray(length, type_size)
 end
 
 function Setup_Num_PArray(length, type_size)
-  local arr = parlous_array.new_num_array(length, type_size)
+  local arr = parlous_array.new_num_array(length, type_size, 5)
   print("-- parlous_array -----------------------")
   for k,v in pairs(getmetatable(arr)) do print(k,v) end
   print("----------------------------------------")
@@ -87,7 +87,7 @@ function Speed_Test_PArray_Map()
 
   -- Initialize ParlousArray
   start_time = os.time()
-  local parray = parlous_array.new_int_array(ARR_SIZE, 8)
+  local parray = parlous_array.new_int_array(ARR_SIZE, 8, 5)
   print("Time tanspired building PArray table: "..os.time()-start_time)
 
   -- Run map on ParlousArray
@@ -104,16 +104,16 @@ function Speed_Test_PArray_Map()
   print("Time tanspired running addition code on Lua table: "..os.time()-start_time)
 
   -- Run map on ParlousArray
-  parray = parlous_array.new_int_array(ARR_SIZE*25, 8)
+  parray = parlous_array.new_int_array(ARR_SIZE*25, 8, 5)
   start_time = os.time()
   parray = parray + parray
   print("Time tanspired running addition code on 25xPArray table: "..os.time()-start_time)
 
   -- Run map on ParlousArray
-  parray = parlous_array.new_num_array(ARR_SIZE*20, 8)
+  parray = parlous_array.new_num_array(ARR_SIZE*15, 8, 5)
   start_time = os.time()
   parray = parray + parray
-  print("Time tanspired running addition code on 20xPArray(num) table: "..os.time()-start_time)
+  print("Time tanspired running addition code on 15xPArray(num) table: "..os.time()-start_time)
   print("----------------------------------------")
 end
 

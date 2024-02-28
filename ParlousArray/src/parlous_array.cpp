@@ -71,16 +71,18 @@ static int add(lua_State* L)                      //// [-0, +1, m]
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
     lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
     T *arrA = (T *)lua_touserdata(L, -2);
     T *arrB = (T *)lua_touserdata(L, -1);
 
     // Allocate array to hold results
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
     newArray<T>(L);                                 // [-0, +1, m]
     T *arrC = (T *)lua_touserdata(L, -1);
-    lua_insert(L, lua_gettop(L) - 2);
-    lua_pop(L, 2);                                  // [-2, +0, -]
+    lua_insert(L, lua_gettop(L) - 3);
+    lua_pop(L, 3);                                  // [-3, +0, -]
 
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
@@ -96,16 +98,18 @@ static int sub(lua_State* L)                      //// [-0, +1, m]
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
     lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
     T *arrA = (T *)lua_touserdata(L, -2);
     T *arrB = (T *)lua_touserdata(L, -1);
 
     // Allocate array to hold results
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
     newArray<T>(L);                                 // [-0, +1, m]
     T *arrC = (T *)lua_touserdata(L, -1);
-    lua_insert(L, lua_gettop(L) - 2);
-    lua_pop(L, 2);                                  // [-2, +0, -]
+    lua_insert(L, lua_gettop(L) - 3);
+    lua_pop(L, 3);                                  // [-3, +0, -]
 
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
@@ -121,16 +125,18 @@ static int mul(lua_State* L)                      //// [-0, +1, m]
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
     lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
     T *arrA = (T *)lua_touserdata(L, -2);
     T *arrB = (T *)lua_touserdata(L, -1);
 
     // Allocate array to hold results
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
     newArray<T>(L);                                 // [-0, +1, m]
     T *arrC = (T *)lua_touserdata(L, -1);
-    lua_insert(L, lua_gettop(L) - 2);
-    lua_pop(L, 2);                                  // [-2, +0, -]
+    lua_insert(L, lua_gettop(L) - 3);
+    lua_pop(L, 3);                                  // [-3, +0, -]
 
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
@@ -146,16 +152,18 @@ static int div(lua_State* L)                      //// [-0, +1, m]
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
     lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
     T *arrA = (T *)lua_touserdata(L, -2);
     T *arrB = (T *)lua_touserdata(L, -1);
 
     // Allocate array to hold results
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
     newArray<T>(L);                                 // [-0, +1, m]
     T *arrC = (T *)lua_touserdata(L, -1);
-    lua_insert(L, lua_gettop(L) - 2);
-    lua_pop(L, 2);                                  // [-2, +0, -]
+    lua_insert(L, lua_gettop(L) - 3);
+    lua_pop(L, 3);                                  // [-3, +0, -]
 
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
@@ -171,16 +179,18 @@ static int mod(lua_State* L)                      //// [-0, +1, m]
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
     lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
     T *arrA = (T *)lua_touserdata(L, -2);
     T *arrB = (T *)lua_touserdata(L, -1);
 
     // Allocate array to hold results
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
     newArray<T>(L);                                 // [-0, +1, m]
     T *arrC = (T *)lua_touserdata(L, -1);
-    lua_insert(L, lua_gettop(L) - 2);
-    lua_pop(L, 2);                                  // [-2, +0, -]
+    lua_insert(L, lua_gettop(L) - 3);
+    lua_pop(L, 3);                                  // [-3, +0, -]
 
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
@@ -196,16 +206,18 @@ static int pow(lua_State* L)                      //// [-0, +1, m]
     // Check and collect parameters from stack
     lua_Integer length = lua_tointeger(L, lua_upvalueindex(1));
     lua_Integer type_size = lua_tointeger(L, lua_upvalueindex(2));
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
     T *arrA = (T *)lua_touserdata(L, -2);
     T *arrB = (T *)lua_touserdata(L, -1);
 
     // Allocate array to hold results
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
     newArray<T>(L);                                 // [-0, +1, m]
     T *arrC = (T *)lua_touserdata(L, -1);
-    lua_insert(L, lua_gettop(L) - 2);
-    lua_pop(L, 2);                                  // [-2, +0, -]
+    lua_insert(L, lua_gettop(L) - 3);
+    lua_pop(L, 3);                                  // [-3, +0, -]
 
     // Add value to all elements
     for (lua_Integer i = 0; i < length; i++)
@@ -263,13 +275,15 @@ static int foreach(lua_State* L)                  //// [-0, +0, m]
 static int len_factory(lua_State* L,              //// [-0, +1, m]
                        lua_Integer length,
                        lua_Integer type_size,
+                       lua_Integer width,
                        lua_CFunction fn)
 {
 
     // Collect len and put on stack
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
-    lua_pushcclosure(L, fn, 2);                     // [-2, +1, -]
+    lua_pushinteger(L, width);                      // [-0, +1, -]
+    lua_pushcclosure(L, fn, 3);                     // [-2, +1, -]
     
     // Return 1 item
     return 1;
@@ -307,56 +321,57 @@ static int index_call(lua_State* L)               //// [-0, +1, m]
 }
 
 template <typename T>
-static void defineMetatable_int(lua_State* L,     //// [-0, +0, m]
+static void defineMetatable(lua_State* L,         //// [-0, +0, m]
                                 lua_Integer length,
-                                lua_Integer type_size)
+                                lua_Integer type_size,
+                                lua_Integer width)
 {
     // Create a metatable for the user data
     lua_createtable(L, 0, 1);                       // [-0, +1, m]
 
     // Define __len
     lua_pushstring(L, "__len");                     // [-0, +1, m]
-    len_factory(L, length, type_size, len);         // [-0, +1, m]
+    len_factory(L, length, type_size, width, len);  // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__index");                   // [-0, +1, m]
-    len_factory(L, length, type_size, index_call<T>);   // [-0, +1, m]
+    len_factory(L, length, type_size, width, index_call<T>);   // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__newindex");                // [-0, +1, m]
-    len_factory(L, length, type_size, put<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, put<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__add");                     // [-0, +1, m]
-    len_factory(L, length, type_size, add<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, add<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__sub");                     // [-0, +1, m]
-    len_factory(L, length, type_size, sub<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, sub<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__mul");                     // [-0, +1, m]
-    len_factory(L, length, type_size, mul<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, mul<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__div");                     // [-0, +1, m]
-    len_factory(L, length, type_size, div<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, div<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__mod");                     // [-0, +1, m]
-    len_factory(L, length, type_size, mod<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, mod<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Define the __index method
     lua_pushstring(L, "__pow");                     // [-0, +1, m]
-    len_factory(L, length, type_size, pow<T>);      // [-0, +1, m]
+    len_factory(L, length, type_size, width, pow<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Set the metatable
@@ -367,14 +382,22 @@ template <typename T>
 int newArray(lua_State* L)                        //// [-0, +1, m]
 {
     // Check and get parameter string from stack
-    lua_Integer length = luaL_checkinteger(L, -2);
-    lua_Integer type_size = luaL_checkinteger(L, -1);
+    lua_Integer length = luaL_checkinteger(L, -3);
+    lua_Integer type_size = luaL_checkinteger(L, -2);
+    lua_Integer width = luaL_checkinteger(L, -1);
+
+    // Check parameters
+    if(length%width != 0)
+        length = ceil(length/width);
 
     // Allocate array
     lua_newuserdata(L, length*type_size);           // [-0, +1, m]
 
     // Define metatable
-    defineMetatable_int<T>(L, length, type_size);   // [-0, +0, m]
+    defineMetatable<T>(L,                           // [-0, +0, m]
+                       length,
+                       type_size,
+                       width);
     
     // Return 1 item
     return 1;
