@@ -303,6 +303,20 @@ function Test_Parlous_Array_Pow()
   assert(0.1 > arr[3] - 123.15, "Expected arr[3]=1.30, actually arr[3]="..arr[3])
 end
 
+function Test_Parlous_Array_Views()
+  print("\n\nTest_Parlous_Array_Views")
+
+  -- TEst Views with width=5
+  local arr = Setup_Int_PArray(20, 8)
+  arr[1] = 2.1; arr[2] = 3.2; arr[3] = 4.3; arr[4] = 5.4; arr[5] = 6.5;
+  arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
+  arr[11] = 2.1; arr[12] = 3.2; arr[13] = 4.3; arr[14] = 5.4; arr[15] = 6.5;
+  arr[16] = 6.6; arr[17] = 7.7; arr[18] = 8.8; arr[19] = 9.9; arr[10] = 10.0;
+  print("arr[12] = "..arr[12]);
+  print("arr(2, 2) = "..arr(2, 2));
+  assert(arr(2, 2) == arr[12], "Expected arr(2, 2)=3, actually arr(2, 2)="..arr(2, 2))
+end
+
 print("> Test_Parlous_Array <")
 Test_Parlous_Int_Array_Meta()
 Test_Parlous_Array_Map()
@@ -314,4 +328,5 @@ Test_Parlous_Array_Mult()
 Test_Parlous_Array_Div()
 Test_Parlous_Array_Mod()
 Test_Parlous_Array_Pow()
-Speed_Test_PArray_Map()
+Test_Parlous_Array_Views()
+-- Speed_Test_PArray_Map()

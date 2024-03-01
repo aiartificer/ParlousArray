@@ -321,6 +321,25 @@ static int index_call(lua_State* L)               //// [-0, +1, m]
 }
 
 template <typename T>
+static int call(lua_State* L)                     //// [-?, +1, m]
+{
+    lua_Integer width = lua_tointeger(L, lua_upvalueindex(3));
+    lua_Integer length = luaL_checkinteger(L, -1);
+    int numArgs = lua_gettop(L);
+    lua_Integer row = 0;
+    if(numArgs >= 2 && length < width)
+    {
+        row = luaL_checkinteger(L, -2);
+        length = width*row + length;
+        lua_pop(L, 2);                              // [-2, +0, -]
+        lua_pushinteger(L, length);                 // [-0, +1, -]
+    }
+
+    // Call __get
+    return get<T>(L);                               // [-0, +1, m]
+}
+
+template <typename T>
 static void defineMetatable(lua_State* L,         //// [-0, +0, m]
                                 lua_Integer length,
                                 lua_Integer type_size,
@@ -339,39 +358,44 @@ static void defineMetatable(lua_State* L,         //// [-0, +0, m]
     len_factory(L, length, type_size, width, index_call<T>);   // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __newindex method
     lua_pushstring(L, "__newindex");                // [-0, +1, m]
     len_factory(L, length, type_size, width, put<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __add method
     lua_pushstring(L, "__add");                     // [-0, +1, m]
     len_factory(L, length, type_size, width, add<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __sub method
     lua_pushstring(L, "__sub");                     // [-0, +1, m]
     len_factory(L, length, type_size, width, sub<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __mul method
     lua_pushstring(L, "__mul");                     // [-0, +1, m]
     len_factory(L, length, type_size, width, mul<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __div method
     lua_pushstring(L, "__div");                     // [-0, +1, m]
     len_factory(L, length, type_size, width, div<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __mod method
     lua_pushstring(L, "__mod");                     // [-0, +1, m]
     len_factory(L, length, type_size, width, mod<T>);      // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
-    // Define the __index method
+    // Define the __pow method
     lua_pushstring(L, "__pow");                     // [-0, +1, m]
     len_factory(L, length, type_size, width, pow<T>);      // [-0, +1, m]
+    lua_settable(L, -3);                            // [-2, +0, -]
+
+    // Define the __call method
+    lua_pushstring(L, "__call");                    // [-0, +1, m]
+    len_factory(L, length, type_size, width, call<T>); // [-0, +1, m]
     lua_settable(L, -3);                            // [-2, +0, -]
 
     // Set the metatable
