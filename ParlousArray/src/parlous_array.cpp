@@ -263,8 +263,9 @@ static int foreach(lua_State* L)                  //// [-0, +0, m]
     // Setup loop
     for (lua_Integer i = 0; i < length; i++)
     {
+        lua_pushinteger(L, i);                      // [-0, +1, -]
         lua_pushnumber(L, (T)arr[i]);               // [-0, +1, -]
-        lua_call(L, 1, 0);                          // [-2, +0, e]
+        lua_call(L, 2, 0);                          // [-3, +0, e]
         lua_pushvalue(L, -1);                       // [-0, +1, -]
     }
 
@@ -283,7 +284,7 @@ static int len_factory(lua_State* L,              //// [-0, +1, m]
     lua_pushinteger(L, length);                     // [-0, +1, -]
     lua_pushinteger(L, type_size);                  // [-0, +1, -]
     lua_pushinteger(L, width);                      // [-0, +1, -]
-    lua_pushcclosure(L, fn, 3);                     // [-2, +1, -]
+    lua_pushcclosure(L, fn, 3);                     // [-3, +1, -]
     
     // Return 1 item
     return 1;
