@@ -48,5 +48,7 @@ Can also perform various standard math operations on the array
 ```Lua
 local int_arr_B = parlous_array.new_int_array(length, type_size, 5)
 -- Initialize the arrays with values here
-int_arr = int_arr + int_arr_B   -- Sumes the elements of int_arr and int_arr_B and puts it into int_arr
+
+-- Sumes the elements of int_arr and int_arr_B and puts it into int_arr
+int_arr = int_arr + int_arr_B
 ```
