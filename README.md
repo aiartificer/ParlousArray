@@ -25,3 +25,14 @@ To acces an element of the array
 int_arr[2]      -- Access the array as a 1D array
 int_arr(2, 2)   -- Access the array as a 2D array
 ```
+
+To iterate through the array using a function, use either map or foreach
+
+```Lua
+-- Iterates through the array itering each element by 1
+arr:map(function (x) return x+1 end)
+
+-- Sums the elements of the array and accumulates the results into sum
+local sum = 0
+arr:foreach(function (x) sum = sum + x end)
+```
