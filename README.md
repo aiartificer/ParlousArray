@@ -51,4 +51,19 @@ local int_arr_B = parlous_array.new_int_array(length, type_size, 5)
 
 -- Sumes the elements of int_arr and int_arr_B and puts it into int_arr
 int_arr = int_arr + int_arr_B
+
+-- Subtracts the elements of int_arr and int_arr_B and puts it into int_arr
+int_arr = int_arr - int_arr_B
+
+-- Multiplies the elements of int_arr and int_arr_B and puts it into int_arr
+int_arr = int_arr*int_arr_B
+
+-- Divides the elements of int_arr and int_arr_B and puts it into int_arr
+int_arr = int_arr/int_arr_B
+
+-- Modulo Divides the elements of int_arr and int_arr_B and puts it into int_arr
+int_arr = int_arr%int_arr_B
+
+-- Sets each element of int_arr to int_arr to the power of int_arry_B element wise
+int_arr = int_arr^int_arr_B
 ```
