@@ -11,12 +11,13 @@ Initialize a parlous array as shown below
 local int_arr = parlous_array.new_int_array(length, type_size, 5)
 local num_arr = parlous_array.new_num_array(length, type_size, 5)
 ```
-
+ ```
 new_int_array(length, type_size, 5)
 new_num_array(length, type_size, 5)
     length - Full length of the array
     type_size - Size of the type represented in bytes
     width - Size of a row if the array is 2D.  The length should be divisible by the given width.
+```
 
 To acces an element of the array
 
