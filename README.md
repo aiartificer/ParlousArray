@@ -30,9 +30,23 @@ To iterate through the array using a function, use either map or foreach
 
 ```Lua
 -- Iterates through the array itering each element by 1
-arr:map(function (x) return x+1 end)
+int_arr:map(function (x) return x+1 end)
 
 -- Sums the elements of the array and accumulates the results into sum
 local sum = 0
-arr:foreach(function (x) sum = sum + x end)
+int_arr:foreach(function (x) sum = sum + x end)
+```
+
+Can also get the length of the array in the standard Lua fashion.  The lenght provided will be the length input during creation and will not care about null values.
+
+```Lua
+length == #int_arr
+```
+
+Can also perform various standard math operations on the array
+
+```Lua
+local int_arr_B = parlous_array.new_int_array(length, type_size, 5)
+-- Initialize the arrays with values here
+int_arr = int_arr + int_arr_B   -- Sumes the elements of int_arr and int_arr_B and puts it into int_arr
 ```
