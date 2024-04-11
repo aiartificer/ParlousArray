@@ -306,7 +306,7 @@ end
 function Test_Parlous_Array_Views()
   print("\n\nTest_Parlous_Array_Views")
 
-  -- TEst Views with width=5
+  -- Test Views with width=5
   local arr = Setup_Int_PArray(20, 8)
   arr[1] = 2.1; arr[2] = 3.2; arr[3] = 4.3; arr[4] = 5.4; arr[5] = 6.5;
   arr[6] = 6.6; arr[7] = 7.7; arr[8] = 8.8; arr[9] = 9.9; arr[0] = 10.0;
@@ -329,4 +329,4 @@ Test_Parlous_Array_Div()
 Test_Parlous_Array_Mod()
 Test_Parlous_Array_Pow()
 Test_Parlous_Array_Views()
--- Speed_Test_PArray_Map()
+Speed_Test_PArray_Map()
