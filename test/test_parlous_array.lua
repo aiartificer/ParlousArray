@@ -60,7 +60,7 @@ function Test_Parlous_Array_Foreach()
   print("arr[0] = "..arr[0])
   assert(arr[0] == 10, "Expected arr[0]=10, actually arr[0]="..arr[0])
   local sum = 0
-  arr:foreach(function (x) sum = sum + x end)
+  arr:foreach(function (i, x) sum = sum + x end)
   print("sum = "..sum)
   assert(sum == 55, "Expected sum=55, actually sum="..sum)
 end
