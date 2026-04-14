@@ -2,6 +2,7 @@
 #define PARLOUS_ARRAY_H_INCLUDED
 
 #define MODULE_NAME "parlous_array"
+#define DLIB_LOG_DOMAIN "ParlousArray"
 
 #include "indefold.h"
 // Replace below lua includes with "#include <dmsdk/sdk.h>" when using in Defold

@@ -1,1 +1,1 @@
-g++ -Iinclude -I../lua-5.1.5/src -I ParlousArray/include -L../lua-5.1.5/src test/test.cpp ParlousArray/src/parlous_array.cpp -O -Wall -o parlous_array -llua
+g++ -Iinclude -I../lua-5.1.5/src -I ../defoldsdk/sdk/include/ -I ../defoldsdk/include/ -I /usr/include/GL/ -I ParlousArray/include -L../lua-5.1.5/src -L /usr/lib64/ test/test.cpp ParlousArray/src/parlous_array.cpp -O -Wall -o parlous_array -llua-5.1
