@@ -7,50 +7,6 @@
 #include "parlous_array.h"
 
 
-// ========================
-// = Defold Wrapper Calls =
-// ========================
-// static int __get_int(lua_State* L)
-// {
-//     DM_LUA_STACK_CHECK(L, 1);
-//     return get_int(L);
-// }
-
-// static int __put_int(lua_State* L)
-// {
-//     DM_LUA_STACK_CHECK(L, 1);
-//     return put_int(L);
-// }
-
-// static int __newIntArray(lua_State* L)
-// {
-//     DM_LUA_STACK_CHECK(L, 1);
-//     return newIntArray(L);
-// }
-
-
-// ========================
-// ====== Lua Stuff =======
-// ========================
-// static const luaL_reg Module_methods[] =
-// {
-//     {"new_int_array", __newIntArray},
-//     {"get", __get_int},
-//     {"put", __put_int},
-//     {0, 0}
-// };
-
-// static void LuaInit(lua_State* L)
-// {
-//     int top = lua_gettop(L);
-
-//     // Register lua names
-//     luaL_register(L, MODULE_NAME, Module_methods);
-
-//     lua_pop(L, 1);
-//     assert(top == lua_gettop(L));
-// }
-
 static dmExtension::Result AppInitializeParlousArray(dmExtension::AppParams* params)
 {
     dmLogInfo("AppInitializeParlousArray");
