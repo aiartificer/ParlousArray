@@ -76,24 +76,43 @@ function Speed_Test_PArray_Map()
   for i=1, ARR_SIZE do
     lua_table[i] = 1
   end
-  print("Time tanspired building table: "..os.time()-start_time)
+  print("Time transpired building table: "..os.time()-start_time)
 
   -- Run code on Lua table
   start_time = os.time()
   for i=1, ARR_SIZE do
     lua_table[i] = lua_table[i]/(lua_table[i]+1)*(lua_table[i]+2)/(lua_table[i]+3)*(lua_table[i]+4)/(lua_table[i]+5)
   end
-  print("Time tanspired running code on table: "..os.time()-start_time)
+  print("Time transpired running code on table: "..os.time()-start_time)
 
   -- Initialize ParlousArray
   start_time = os.time()
   local parray = parlous_array.new_int_array(ARR_SIZE, 8, 5)
-  print("Time tanspired building PArray table: "..os.time()-start_time)
+  print("Time transpired building PArray table: "..os.time()-start_time)
 
   -- Run map on ParlousArray
   start_time = os.time()
   parray:map(function (x) return x/(x+1)*(x+2)/(x+3)*(x*4)/(x+5) end)
-  print("Time tanspired running code on PArray table: "..os.time()-start_time)
+  print("Time transpired running code on PArray table (using map): "..os.time()-start_time)
+  print("----------------------------------------")
+
+  -- Run put on ParlousArray
+  local parray = parlous_array.new_int_array(ARR_SIZE, 8, 5)
+  start_time = os.time()
+  for i=1, ARR_SIZE do
+    parray[i-1] = parray[i-1]/(parray[i-1]+1)*(parray[i-1]+2)/(parray[i-1]+3)*(parray[i-1]+4)/(parray[i-1]+5)
+  end
+  print("Time transpired running code on PArray table (using put): "..os.time()-start_time)
+  print("----------------------------------------")
+
+  -- Run put on ParlousArray
+  local parray = parlous_array.new_int_array(ARR_SIZE, 8, 5)
+  start_time = os.time()
+  for i=1, ARR_SIZE do
+    local x = parray[i-1]
+    parray[i-1] = x/(x+1)*(x+2)/(x+3)*(x+4)/(x+5)
+  end
+  print("Time transpired running code on PArray table (using local then put): "..os.time()-start_time)
   print("----------------------------------------")
 
   -- Run code on Lua table
@@ -101,19 +120,19 @@ function Speed_Test_PArray_Map()
   for i=1, ARR_SIZE do
     lua_table[i] = lua_table[i] + lua_table[i]
   end
-  print("Time tanspired running addition code on Lua table: "..os.time()-start_time)
+  print("Time transpired running addition code on Lua table: "..os.time()-start_time)
 
   -- Run map on ParlousArray
   parray = parlous_array.new_int_array(ARR_SIZE*25, 8, 5)
   start_time = os.time()
   parray = parray + parray
-  print("Time tanspired running addition code on 25xPArray table: "..os.time()-start_time)
+  print("Time transpired running addition code on 25xPArray table: "..os.time()-start_time)
 
   -- Run map on ParlousArray
   parray = parlous_array.new_num_array(ARR_SIZE*15, 8, 5)
   start_time = os.time()
   parray = parray + parray
-  print("Time tanspired running addition code on 15xPArray(num) table: "..os.time()-start_time)
+  print("Time transpired running addition code on 15xPArray(num) table: "..os.time()-start_time)
   print("----------------------------------------")
 end
 
